@@ -8,7 +8,7 @@ ijsjes = []
 
 
 # Input van de gebruiker en antwoorden limiteren tot een lijst
-def input(input_string, allowed: list = None, incorrect_msg: str = 'Sorry, dat snap ik niet...'):
+def input(input_string, allowed: list = None, incorrect_msg: str = 'Sorry dat is geen optie die we aanbieden...'):
     while (antwoord := builtins.input(input_string)) is not None and not (allowed is None or antwoord in allowed):
         print(incorrect_msg)
     return antwoord
@@ -22,7 +22,7 @@ class Ijsje:
         self.topping_kosten = 0.0
 
 
-# Gebruiker prijzen/totaal laten zien
+# Gebruiker prijzen/totaal laten zien (Negeer lelijke code)
 def print_bonnetje():
     print('--------- ["Papi Gelato"] ---------\n')
 
@@ -56,7 +56,7 @@ def print_bonnetje():
         topping_kosten += ijsje.topping_kosten
 
     # Totaal prijs is de hoeveelheid keer €9.80 (zakelijk) en €1.10 (particulier)
-    totaal_prijs = hvh * (9.8 if is_zakelijk else 1.1)
+    totaal_prijs = hvh * (9.8 if is_zakelijk else 0.95)
 
     # Print de totale prijs voor het aantal Liters/Bolletjes
     print(f'{("Liters" if is_zakelijk else "Bolletjes").ljust(16 - len(str(hvh)))}{hvh} x €9.80 = €{totaal_prijs:.2f}')
@@ -96,7 +96,7 @@ def print_bonnetje():
 
     # Alleen de btw laten zien als het zakelijk is
     if is_zakelijk:
-        print(f'{"BTW (9%)".ljust(25)}= €{((totaal_prijs / 109) * 9):.2f}')
+        print(f'{"BTW (6%)".ljust(25)}= €{((totaal_prijs / 109) * 6):.2f}')
 
 
 # Vraagt de gebruiker of ze nog een keer iets willen bestellen
@@ -149,8 +149,8 @@ def bakje_of_hoorntje():
 def welke_smaak():
     for i in range(ijsjes[-1].hoeveelheid):
         input(
-            f'Welke smaak wilt u voor {"liter" if is_zakelijk else "bolletje"} nummer {i + 1}? A) Aardbei, C) Chocolade, M) Munt of V) Vanille?\n\t[A/C/M/V] ',
-            ['A', 'C', 'M', 'V'])
+            f'Welke smaak wilt u voor {"liter" if is_zakelijk else "bolletje"} nummer {i + 1}? A) Aardbei, C) Chocolade of V) Vanille?\n\t[A/C/M/V] ',
+            ['A', 'C', 'V'])
 
 
 # Boolean die bepaalt of het een zakelijke transactie is
